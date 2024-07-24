@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { FcFullTrash, FcCheckmark  } from "react-icons/fc";
+import { FcFullTrash, FcCheckmark } from "react-icons/fc";
 
 import { Container, ToDoList, Input, Button, ListItem } from './styles';
 
 
 
 function App() {
-  const [list, setList] = useState([{ id: uuid(), task: 'event.target.value' }])
+  const [list, setList] = useState([{ id: uuid(), task: 'nada', finished: true }])
   const [InputTask, setInputTask] = useState('')
 
   function inputChange(event) {
@@ -16,7 +16,15 @@ function App() {
   }
 
   function buttonClick() {
-    setList([...list, { id: uuid(), task: InputTask }])
+    setList([...list, { id: uuid(), task: InputTask, finished: false }])
+  }
+
+  function finishTask(id){
+    const newList = list.map(item => (
+      item.id === id ? { ...item, finished: !item.finished} : item
+    ))
+
+    setList(newList)
   }
 
   return (
@@ -28,10 +36,10 @@ function App() {
         <ul>
           {
             list.map(item => (
-              <ListItem>
-              <FcCheckmark/>
-              <li key={item.id}> {item.task} </li>
-              <FcFullTrash/>
+              <ListItem isFinished={item.finished} key={item.id}>
+                <FcCheckmark onClick={()=> finishTask(item.id)} />
+                <li> {item.task} </li>
+                <FcFullTrash />
               </ListItem>
             ))
           }
