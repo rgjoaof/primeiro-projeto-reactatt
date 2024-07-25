@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+import { FcFullTrash, FcCheckmark } from "react-icons/fc";
+
 export const Container = styled.div`
     background: linear-gradient(90deg, #383838 0%, #000000 81.25%);
     width: 100vw;
@@ -39,6 +41,15 @@ export const Button = styled.button`
     font-weight: 900;
     height: 40px;
     width: 130px;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.7;
+    }
+
+    &:active{
+        opacity: 0.5;
+    }
 `
 
 export const ListItem = styled.div`
@@ -57,5 +68,18 @@ export const ListItem = styled.div`
     li{
         list-style: none;
     }
+`
 
+export const MessageH3 = styled.h3`
+    text-align:center;
+    color: red;
+
+`
+
+export const Trash = styled(FcFullTrash)`
+    cursor: pointer;
+`
+
+export const Check = styled(FcCheckmark)`
+    cursor: pointer;
 `
